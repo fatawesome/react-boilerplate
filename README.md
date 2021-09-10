@@ -1,4 +1,4 @@
-#React ecosystem boilerplate
+# React ecosystem boilerplate
 
 **Disclaimer:** mainly I created this for personal use. But if it somehow helps you, you are welcome :)
 
