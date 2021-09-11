@@ -11,7 +11,7 @@ interface Configuration extends WebpackConfiguration {
 }
 
 const config: Configuration = {
-  mode: 'production',
+  mode: 'development',
   entry: {
     app: path.join(__dirname, 'src', 'index.tsx')
   },
@@ -45,9 +45,7 @@ const config: Configuration = {
     ],
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: '[name].[contenthash].js',
-    publicPath: "",
+    publicPath: "/",
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -59,7 +57,8 @@ const config: Configuration = {
     new ESLintWebpackPlugin({
       extensions: ['js', 'jsx', 'ts', 'tsx']
     }),
-    new CleanWebpackPlugin()
+    new CleanWebpackPlugin(),
+    new HotModuleReplacementPlugin(),
   ]
 }
 

@@ -1,16 +1,11 @@
 import path from "path";
-import { Configuration as WebpackConfiguration, HotModuleReplacementPlugin } from 'webpack';
-import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server';
+import { Configuration } from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ESLintWebpackPlugin from 'eslint-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
-interface Configuration extends WebpackConfiguration {
-  devServer?: WebpackDevServerConfiguration
-}
-
 const config: Configuration = {
-  mode: 'development',
+  mode: 'production',
   entry: {
     app: path.join(__dirname, 'src', 'index.tsx')
   },
@@ -37,7 +32,9 @@ const config: Configuration = {
     ],
   },
   output: {
-    publicPath: "/",
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].[contenthash].js',
+    publicPath: "",
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -46,19 +43,10 @@ const config: Configuration = {
     new ForkTsCheckerWebpackPlugin({
       async: false
     }),
-    new HotModuleReplacementPlugin(),
     new ESLintWebpackPlugin({
       extensions: ['js', 'jsx', 'ts', 'tsx']
     })
-  ],
-  devtool: "inline-source-map",
-  devServer: {
-    static: path.join(__dirname, "dist"),
-    historyApiFallback: true,
-    port: 4000,
-    open: false,
-    hot: true
-  }
+  ]
 }
 
 export default config;
