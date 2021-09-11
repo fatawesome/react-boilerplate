@@ -18,6 +18,14 @@ const config: Configuration = {
   resolve: {
     extensions: ['.ts', '.tsx', '.js']
   },
+  devtool: "inline-source-map",
+  devServer: {
+    static: path.join(__dirname, "build"),
+    historyApiFallback: true,
+    port: 4000,
+    open: false,
+    hot: true
+  },
   module: {
     rules: [
       {
